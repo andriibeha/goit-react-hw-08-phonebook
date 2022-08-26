@@ -24,9 +24,8 @@ export const addUser = createAsyncThunk(
                 email: data.email,
                 password: data.password,
             };
-            console.log(user)
 
-            const response = await fetch(`https://connections-api.herokuapp.com/users/signup`, {
+            const response = await fetch("https://connections-api.herokuapp.com/users/signup", {
                 method: 'POST',
                 headers: {
                     'Content-Type': "application/json",
