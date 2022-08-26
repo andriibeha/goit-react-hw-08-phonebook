@@ -16,8 +16,8 @@ const initialState = {
     user: { name: null, email: null},
     token: null,
     isloggedIn: false,
+    isRefreshing: false,
 };
-
 
 export const addUser = createAsyncThunk(
     "user/addUser", async credentials => {
@@ -91,10 +91,17 @@ export const userSlice = createSlice({
             state.token = null;
             state.isloggedIn = false;
         },
+        [refreshCurrentUser.pending](state) {
+            state.isRefreshing = true;
+        },
         [refreshCurrentUser.fulfilled](state, action) {
             state.user = action.payload;
             state.isloggedIn = true;
-        }
+            state.isRefreshing = false;
+        },
+        [refreshCurrentUser.rejected](state) {
+            state.isRefreshing = false;
+        },
     },
 });
 
