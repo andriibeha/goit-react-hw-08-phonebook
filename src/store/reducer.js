@@ -8,7 +8,7 @@ const initialState = {
         filter: {
             value: ""
         }
-    }
+    }, 
 };
 
 const setError = (state, action) => {

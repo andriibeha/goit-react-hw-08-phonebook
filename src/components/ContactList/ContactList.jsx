@@ -27,14 +27,14 @@ const ContactList = () => {
     let filtredContacts = getVisibleContacts();
 
     return (
-        <ul className={s.list}>
-            {error && <li>{error}</li>}
-            {isLoading && <li>Loading...</li>}
+            <ul className={s.list}>
+                {error && <li>{error}</li>}
+                {isLoading && <li>Loading...</li>}
                 
-            {filtredContacts.map((item) => (
-                <ContactItem key={item.id} item={item} />
-            ))}
-        </ul>
+                {filtredContacts.map((item) => (
+                    <ContactItem key={item.id} item={item} />
+                ))}
+            </ul>
     );
 };
 
