@@ -11,12 +11,12 @@ const Home = () => {
             <p>Just <NavLink to="/login">Login</NavLink> into site
                 or if you don't have accaunt, - go to <NavLink to="/registration">Registration</NavLink>.
                 Then you can go to <NavLink to="/contacts">Contacts</NavLink>.
-                In Contacts you can: 
+                In Contacts you can: </p>
                 <ol>
                     <li>Add contact, just write name and phone and click on button "Add contact" (You can't add contact with same name!).</li>
                     <li>You can delete contact from contacs list, just click on button "Delete" </li>
                 </ol>
-            </p>
+            
         </>
     );
 };

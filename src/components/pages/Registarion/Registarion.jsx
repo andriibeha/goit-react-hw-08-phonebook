@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addUser } from "../../../store/userReducer";
 import { nanoid } from 'nanoid';
 
@@ -14,7 +14,6 @@ const Registration = () => {
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
 
-    const user = useSelector((state) => state.userSlice.user);
     const dispatch = useDispatch();
 
     const reset = () => {
@@ -36,16 +35,7 @@ const Registration = () => {
     const handleSubmit = (e) => { 
         e.preventDefault();
 
-        let data = { name, email, password };
-        console.log(user)
-        /* let findEmail = user.find(item => item.name.toLowerCase() === data.email.toLowerCase());  */
-        /* if (findEmail) { 
-            return alert(`${data.name} is already in contact`);
-        } else { 
-            dispatch(addUser(data))
-        }; */
-
-        dispatch(addUser(data));
+        dispatch(addUser({name, email, password}));
         reset();
     };
 

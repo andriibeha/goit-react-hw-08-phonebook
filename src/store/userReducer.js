@@ -1,60 +1,100 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+axios.defaults.baseURL = "https://connections-api.herokuapp.com";
+
+const token = { 
+    set(token) {
+        axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    },
+    unset() {
+        axios.defaults.headers.common.Authorization = "";
+    }
+}
 
 const initialState = {
-    user: { 
-        email: "",
-        password: "",
-        name: "",
-        token: ""
-    },
+    user: { name: null, email: null},
+    token: null,
+    isloggedIn: false,
 };
 
-const setError = (state, action) => {
-    state.isLoading = false;
-    state.error = action.payload;
-};
 
 export const addUser = createAsyncThunk(
-    "user/addUser",
-    async function (data, { rejectWithValue, dispatch }) { 
-        try { 
+    "user/addUser", async credentials => {
+        try {
+            const { data } = await axios.post('/users/signup', credentials);
+            token.set(data.token);
+            return data;
+        } catch (error) {
             
-            const user = {
-                name: data.name,
-                email: data.email,
-                password: data.password,
-            };
-
-            const response = await fetch("https://connections-api.herokuapp.com/users/signup", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': "application/json",
-                },
-                body: JSON.stringify(user)
-            });
-
-            if (!response.ok) { 
-                throw new Error('Sorry cant add user:(');  
-            };
-
-            dispatch(setUser(data));
-        } catch (error) { 
-            return rejectWithValue(error.message);
         }
     }
 );
 
+export const loginUser = createAsyncThunk(
+    "user/loginUser", async credentials => {
+        try {
+            const { data } = await axios.post('/users/login', credentials);
+            token.set(data.token);
+            return data;
+        } catch (error) {
+            
+        }
+    }
+);
+
+export const logoutUser = createAsyncThunk(
+    "user/logout", async () => {
+        try {
+            await axios.post('/users/logout');
+            token.unset();
+        } catch (error) {
+            
+        }
+    }
+);
+
+export const refreshCurrentUser = createAsyncThunk('user/refresh', async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistatedToken = state.userSlice.token;
+
+    if (persistatedToken === null) { 
+        return thunkAPI.rejectWithValue()
+    };
+
+    token.set(persistatedToken);
+    
+    try { 
+        const { data } = await axios.get('users/current');
+        return data
+    } catch (error) { 
+        
+    }
+})
+
 export const userSlice = createSlice({
     name: 'user',
     initialState,
-    reducers: {
-        setUser: (state, action) => { 
-            console.log("state", state);
-            console.log("action", action.payload);
-        },
-    },
     extraReducers: {
-        [addUser.rejected]: setError,
+        [addUser.fulfilled](state, action) {
+            state.user = action.payload.user;
+            state.token = action.payload.token;
+            state.isloggedIn = true;
+        },
+        [loginUser.fulfilled](state, action) {
+            state.user = action.payload.user;
+            state.token = action.payload.token;
+            state.isloggedIn = true;
+        },
+        [logoutUser.fulfilled](state) {
+            state.user = null;
+            state.token = null;
+            state.isloggedIn = false;
+        },
+        [refreshCurrentUser.fulfilled](state, action) {
+            state.user = action.payload;
+            state.isloggedIn = true;
+        }
     },
 });
 
