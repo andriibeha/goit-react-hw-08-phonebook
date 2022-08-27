@@ -2,7 +2,6 @@ import {useState} from "react";
 import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'react-redux';
 import { addContacts } from "../../store/reducer";
-import s from './Form.module.css';
 
 
 let inputNameId = nanoid();
@@ -46,32 +45,40 @@ function Form() {
 
     return (
         <div>
-            <form onSubmit={handleSubmit} className={s.form}>
-                <label htmlFor={inputNameId} className={s.label}>Name:</label>
-                <input onInput={handleInputChange}
-                    className={s.input}
-                    value={name}
-                    type="text"
-                    name="name"
-                    pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                    title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-                    required
-                    id={inputNameId}
-                />
+            <form onSubmit={handleSubmit} className="">
+                <div className="flex flex-col my-3 items-center border bg-gray-200 ">
+                    <label className="my-2 font-bold" htmlFor={inputNameId}>Name:</label>
+                    <input onInput={handleInputChange}
+                        className="border rounded-xl px-2 w-1/2 mb-3 "
+                        value={name}
+                        type="text"
+                        name="name"
+                        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+                        required
+                        id={inputNameId}
+                    />
                     
-                <label htmlFor={inputTelId} className={s.label}>Number:</label>
-                <input onInput={handleInputChange}
-                    className={s.input}
-                    value={phone}
-                    type="tel"
-                    name="number"
-                    pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-                    title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-                    required
-                    id={inputTelId}
-                />
+                    <label className="my-2 font-bold" htmlFor={inputTelId} >Number:</label>
+                    <input onInput={handleInputChange}
+                        className="border rounded-xl px-2 w-1/2 mb-3 "
+                        value={phone}
+                        type="tel"
+                        name="number"
+                        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+                        required
+                        id={inputTelId}
+                    />
+
+                    <button className="border rounded-xl bg-orange-600 py-1 px-3
+                 hover:text-white display: flex items-center justify-center m-auto
+                 my-3  "
+                        type="submit" >Add contact</button>
+                </div>
+                
                         
-                <button type="submit" className={s.button}>Add contact</button>
+                
             </form>
         </div>
     );

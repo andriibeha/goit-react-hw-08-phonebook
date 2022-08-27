@@ -2,7 +2,7 @@ import ContactItem from "components/ContactItem/ContactItem";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts} from "../../store/reducer";
-import s from "./ContactList.module.css";
+
 
 const ContactList = () => {
     const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const ContactList = () => {
     let filtredContacts = getVisibleContacts();
 
     return (
-            <ul className={s.list}>
+            <ul className="px-5  grid grid-cols-2 m-auto items-center text-center">
                 {error && <li>{error}</li>}
                 {isLoading && <li>Loading...</li>}
                 

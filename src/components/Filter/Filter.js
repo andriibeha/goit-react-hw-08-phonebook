@@ -11,12 +11,15 @@ const Filter = () => {
     };
 
     return (
-        <label>
-            Find contacts by name
-            <input type="text"
-                value={value}
-                onChange={onChange} />
-        </label>
+        <div className="pt-2 flex items-center m-auto justify-center bg-gray-200">
+            <label className="my-2 ">
+                Find contacts by name
+                <input className="ml-5 border rounded-xl px-2  mb-3 "
+                    type="text"
+                    value={value}
+                    onChange={onChange} />
+            </label>
+        </div>
     );
 };
 

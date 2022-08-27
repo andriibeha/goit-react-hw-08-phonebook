@@ -37,32 +37,43 @@ const Login = () => {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <h2>Login</h2>
-                <p>Please fill in this form to login an account.</p>
+                <h2 className="text-2xl text-center">Login</h2>
+                <p className="my-3 text-center">Please fill in this form to login an account.</p>
 
-                <label htmlFor={inputEmailId}><b>Email</b></label>
-                <input onInput={handleInputChange}
-                    value={email}
-                    type="text"
-                    placeholder="Enter Email"
-                    name="email"
-                    required
-                    id={inputEmailId}>
+                <div className="flex flex-col my-3 items-center border bg-gray-200 ">
+                    <label className="my-2" htmlFor={inputEmailId}><b>Email</b></label>
+                    <input onInput={handleInputChange}
+                        className="border rounded-xl px-2 w-1/2 mb-3 "
+                        value={email}
+                        type="text"
+                        placeholder="Enter Email"
+                        name="email"
+                        required
+                        id={inputEmailId}>
                     </input>
 
-                <label htmlFor={inputPasswordId}><b>Password</b></label>
-                <input onInput={handleInputChange}
-                    value={password}
-                    type="password"
-                    placeholder="Enter Password"
-                    name="password"
-                    required
-                    id={inputPasswordId}>
+                    <label className="my-2" htmlFor={inputPasswordId}><b>Password</b></label>
+                    <input onInput={handleInputChange}
+                        className="border rounded-xl px-2 w-1/2 mb-3 "
+                        value={password}
+                        type="password"
+                        placeholder="Enter Password"
+                        name="password"
+                        required
+                        id={inputPasswordId}>
                     </input>
+                </div>
 
-                <p>Don't have account? <NavLink to="/registration">Sign up</NavLink></p>
+
+                <p className="text-center">
+                    Don't have account?
+                    <NavLink className="text-sky-500 underline ml-1" to="/registration">Sign up</NavLink>
+                </p>
                 
-                <button type="submit" >Login</button>
+                <button className="border rounded-xl bg-orange-600 py-1 px-3
+                 hover:text-white display: flex items-center justify-center m-auto
+                 my-3  "
+                    type="submit" >Login</button>
             </form>
         </>
     );

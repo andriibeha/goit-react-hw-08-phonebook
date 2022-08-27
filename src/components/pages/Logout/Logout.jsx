@@ -7,7 +7,8 @@ const Logout = () => {
 
     return (
         <>
-            <button type="button" onClick={() => dispatch(logoutUser())}>Logout</button>
+            <button className='ml-5 hover:text-black active:text-black  focus:text-black'
+                type="button" onClick={() => dispatch(logoutUser())}>Logout</button>
         </>
     );
 };

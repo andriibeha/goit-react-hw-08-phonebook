@@ -1,20 +1,17 @@
 import Form from "../../Form/Form";
 import ContactList from "../../ContactList/ContactList";
+import Filter from "components/Filter/Filter";
 
 const Contacts = () => {
 
-   /*  <h1>Phonebook</h1>
-                <From />
-                <h2>Contacts</h2>
-                <Filter />
-        <ContactList /> */
-
     return (
         <>
-            <h1>Phonebook</h1>
+            <h1 className="text-center text-3xl my-3">Phonebook</h1>
             <Form />
 
-            <h2>Contacts</h2>
+            <Filter />
+            
+            <h2 className="text-center text-2xl my-3">Contacts</h2>
 
             <ContactList />
         </>

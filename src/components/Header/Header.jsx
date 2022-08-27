@@ -3,7 +3,6 @@ import AuthNav from "components/AuthNav/AuthNav";
 import UserMenu from "components/UserMenu/UserMenu";
 import Footer from "components/Footer/Froote";
 import { useSelector } from "react-redux";
-import s from './Header.module.css';
 
 
 const Header = () => {
@@ -11,18 +10,20 @@ const Header = () => {
     
     return (
         <>
-            <header className={s.header}>
-                <NavLink to="/" className={s.link}>Home</NavLink>
+            <header className="text-2xl px-7 py-3 flex justify-between bg-orange-600
+             text-white ">
+                <NavLink to="/" className="hover:text-black active:text-black  focus:text-black">Home</NavLink>
                 {isloggedIn ?
-                    <UserMenu />
+                    <UserMenu  />
                     :
-                    <AuthNav />
+                    <AuthNav  />
                 }
             </header>
-            <main className={s.container}>
+            <main className="my-5 px-3">
                 <Outlet />
             </main>
-            <footer>
+            <footer className="bg-orange-600 px-7 py-3 text-white text-1xl
+                flex justify-between">
                 <Footer />
             </footer>
         </>
