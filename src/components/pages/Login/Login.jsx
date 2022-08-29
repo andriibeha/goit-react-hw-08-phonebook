@@ -6,6 +6,7 @@ import { nanoid } from 'nanoid';
 
 let inputEmailId = nanoid();
 let inputPasswordId = nanoid();
+console.log("TEST")
 
 
 const Login = () => {
