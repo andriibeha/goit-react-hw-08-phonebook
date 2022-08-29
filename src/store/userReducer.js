@@ -26,19 +26,19 @@ export const addUser = createAsyncThunk(
             token.set(data.token);
             return data;
         } catch (error) {
-            
+            return alert("Email or paswword of name is wrong! Pls try again") 
         }
     }
 );
 
 export const loginUser = createAsyncThunk(
-    "user/loginUser", async credentials => {
+    "user/loginUser", async (credentials, {rejectWithValue}) => {
         try {
             const { data } = await axios.post('/users/login', credentials);
             token.set(data.token);
             return data;
         } catch (error) {
-            
+            return alert("Email or paswword is wrong! Pls try again") 
         }
     }
 );

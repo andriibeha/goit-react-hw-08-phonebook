@@ -14,10 +14,6 @@ const Login = () => {
 
     const dispatch = useDispatch();
 
-    const reset = () => {
-        setEmail("");
-        setPassword("");
-    };
 
     const handleInputChange = (e) => {
         if (e.target.name === "email") { 
@@ -31,7 +27,6 @@ const Login = () => {
         e.preventDefault();
 
         dispatch(loginUser({ email, password}));
-        reset();
     };
 
     return (

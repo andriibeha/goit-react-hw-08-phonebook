@@ -16,12 +16,6 @@ const Registration = () => {
 
     const dispatch = useDispatch();
 
-    const reset = () => {
-        setEmail("");
-        setPassword("");
-        setName("");
-    };
-
     const handleInputChange = (e) => {
         if (e.target.name === "email") { 
             return (setEmail(e.target.value));
@@ -36,7 +30,6 @@ const Registration = () => {
         e.preventDefault();
 
         dispatch(addUser({name, email, password}));
-        reset();
     };
 
     return (
